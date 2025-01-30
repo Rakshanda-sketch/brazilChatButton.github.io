@@ -82,6 +82,7 @@
             const phoneInput = document.getElementById('phone');
             const emailInput = document.getElementById('email');
             const form = document.querySelector('form');
+            const submitButton = document.querySelector('input[type="submit"]');
             function validateEmail(email) {
                 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                 return emailPattern.test(email);
@@ -122,13 +123,17 @@
  
             function resetForm() {
                 form.reset(); // Reset all form fields
+                submitButton.disabled = false; // Re-enable the submit button
             }
  
             // Attach event listeners
             form.addEventListener('submit', function(event) {
                 if (validateForm(event)) {
+                    submitButton.disabled = true; // Disable the submit button after submission
                     // Delay the form reset to ensure the form is submitted successfully
                     setTimeout(resetForm, 1000);
+                } else {
+                    event.preventDefault(); // Prevent form submission if validation fails
                 }
             });
  
