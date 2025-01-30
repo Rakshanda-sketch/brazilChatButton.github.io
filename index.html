@@ -1,32 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NWS6J9RN');</script>
-<!-- End Google Tag Manager -->
-
- 
-<title>Page Title</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Responsive Form</title>
 <style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
+        /* Basic Reset */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: AvenirNextRegular, sans-serif;
+            background-color: #f4f4f4; 
+            color: #0C121C;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        /* Form Styling */
+        form {
+            max-width: 600px; 
+            margin: 20px auto; 
+            padding: 20px; 
+            background: white; 
+            border-radius: 5px; 
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        /* Input Fields and Textarea */
+        input[type="text"],
+        textarea {
+            width: 100%; 
+            padding: 10px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 0; 
+            box-sizing: border-box; 
+            font-size: 16px; 
+        }
+        /* Label Styling */
+        label {
+            margin-bottom: 5px; 
+            display: block; 
+            font-weight: bold; 
+        }
+        /* Submit Button Styling */
+        input[type="submit"] {
+            font-family: AvenirNextRegular, sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 13px;
+            letter-spacing: 2px;
+            background-color: #0C121C;
+            padding: 10px; 
+            border-radius: 0; 
+            cursor: pointer; 
+            color: #ffffff;
+            text-align: center;
+            border: none; /* Remove default border */
+        }
+        /* Button Hover Effect */
+        input[type="submit"]:hover {
+            background-color: #ffffff; 
+            color: #333333; 
+            border: 1px solid #0C121C; /* Border on hover */
+        }
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            form {
+                padding: 15px; 
+            }
+            input[type="text"],
+            textarea {
+                font-size: 14px; 
+            }
+            input[type="submit"] {
+                font-size: 14px; 
+            }
+        }
 </style>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const phoneInput = document.getElementById('phone');
+            const emailInput = document.getElementById('email');
+            const form = document.querySelector('form');
+            function validateEmail(email) {
+                const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                return emailPattern.test(email);
+            }
+            function validatePhone(phone) {
+                const phonePattern = /^[\+0-9\s()]{1,16}$/; // Allow +, digits, spaces, and parentheses
+                const digitsOnly = phone.replace(/\D/g, ''); // Extract only digits
+                return phonePattern.test(phone) && digitsOnly.length <= 16;
+            }
+            function validateForm(event) {
+                const email = emailInput.value.trim();
+                const phone = phoneInput.value.trim();
+                // Check if at least one of the fields is filled
+                if (!email && !phone) {
+                    alert("Por favor ingrese una dirección de correo electrónico válida o un número de teléfono.");
+                    event.preventDefault();
+                    return false;
+                }
+                // Validate email if provided
+                if (email && !validateEmail(email)) {
+                    alert("La dirección de correo electrónico introducida no se reconoce, introduzca una dirección de correo electrónico válida.");
+                    event.preventDefault();
+                    return false;
+                }
+                // Validate phone if provided
+                if (phone && !validatePhone(phone)) {
+                    alert("Por favor ingrese un número de teléfono válido.");
+                    event.preventDefault();
+                    return false;
+                }
+                return true; // Allow form submission
+            }
+            function limitPhoneInput(event) {
+                const input = event.target;
+                const allowedCharacters = input.value.replace(/[^0-9+\s()]/g, ''); // Keep only allowed characters
+                input.value = allowedCharacters.slice(0, 16); // Limit to 16 characters
+            }
  
+            function resetForm() {
+                form.reset(); // Reset all form fields
+            }
+ 
+            // Attach event listeners
+            form.addEventListener('submit', function(event) {
+                if (validateForm(event)) {
+                    // Delay the form reset to ensure the form is submitted successfully
+                    setTimeout(resetForm, 1000);
+                }
+            });
+ 
+            phoneInput.addEventListener('input', limitPhoneInput);
+        });
+</script>
 </head>
 <body>
- 
-<h1>My Website</h1>
-<p>A website created by me.</p>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NWS6J9RN"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+<!-- Form Element -->
+<form action="https://jlr-360--naptqa.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D260000009LIY" method="POST">
+<input type="hidden" name="orgid" value="00D260000009LIY">
+<input type="hidden" name="retURL" value="https://">
+
+<label for="name">Nombre</label>
+<input id="name" maxlength="80" name="name" size="20" type="text" required />
+<label for="email">Correo electrónico</label>
+<input id="email" maxlength="80" name="email" size="20" type="text"/>
+<label for="phone">Telefono</label>
+<input id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
+<label for="subject">Sujeto</label>
+<input id="subject" maxlength="80" name="subject" size="20" type="text" required />
+<label for="description">Descripción</label>
+<textarea name="description" required></textarea>
+<input type="hidden" name="recordType" value="01226000002uRfa" />
+<input type="hidden" name="priority" value="Low" />
+<input type="hidden" id="00N2600000EDEF8" name="00N2600000EDEF8" value="Europe" />
+<input id="00NVe000000lZNJ" maxlength="255" name="00NVe000000lZNJ" size="20" type="hidden" value="https://www.jaguar.es"/>
+<input type="submit" name="submit" value="Entregar">
+</form>
 </body>
 </html>
