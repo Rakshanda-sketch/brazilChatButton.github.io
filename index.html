@@ -131,7 +131,7 @@
                 if (validateForm(event)) {
                     submitButton.disabled = true; // Disable the submit button after submission
                     // Delay the form reset to ensure the form is submitted successfully
-                    setTimeout(resetForm, 100);
+                    setTimeout(resetForm, 50);
                 } else {
                     event.preventDefault(); // Prevent form submission if validation fails
                 }
