@@ -16,7 +16,6 @@
             font-size: 14px;
             font-weight: 600;
         }
- 
         /* Form Styling */
         form {
             max-width: 600px; 
@@ -26,7 +25,6 @@
             border-radius: 5px; 
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
- 
         /* Input Fields and Textarea */
         input[type="text"],
         textarea {
@@ -38,18 +36,16 @@
             box-sizing: border-box; 
             font-size: 16px; 
         }
- 
         /* Label Styling */
         label {
             margin-bottom: 5px; 
             display: block; 
             font-weight: bold; 
         }
- 
         /* Submit Button Styling */
         input[type="submit"] {
             font-family: AvenirNextRegular, sans-serif;
-            font-size: 14px;	
+            font-size: 14px;
             font-weight: 600;
             line-height: 13px;
             letter-spacing: 2px;
@@ -61,25 +57,21 @@
             text-align: center;
             border: none; /* Remove default border */
         }
- 
         /* Button Hover Effect */
         input[type="submit"]:hover {
             background-color: #ffffff; 
             color: #333333; 
             border: 1px solid #0C121C; /* Border on hover */
         }
- 
         /* Responsive Styles */
         @media (max-width: 600px) {
             form {
                 padding: 15px; 
             }
- 
             input[type="text"],
             textarea {
                 font-size: 14px; 
             }
- 
             input[type="submit"] {
                 font-size: 14px; 
             }
@@ -95,95 +87,81 @@
                 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                 return emailPattern.test(email);
             }
- 
             function validatePhone(phone) {
                 const phonePattern = /^[\+0-9\s()]{1,16}$/; // Allow +, digits, spaces, and parentheses
                 const digitsOnly = phone.replace(/\D/g, ''); // Extract only digits
                 return phonePattern.test(phone) && digitsOnly.length <= 16;
             }
- 
             function validateForm(event) {
                 const email = emailInput.value.trim();
                 const phone = phoneInput.value.trim();
- 
                 // Check if at least one of the fields is filled
                 if (!email && !phone) {
-                    alert("Prosím, zadajte platnú e-mailovú adresu alebo telefónne číslo.");
+                    alert("Por favor ingrese una dirección de correo electrónico válida o un número de teléfono.");
                     event.preventDefault();
                     return false;
                 }
- 
                 // Validate email if provided
                 if (email && !validateEmail(email)) {
-                    alert("Zadaná e-mailová adresa je neplatná.Zadajte, prosím, platnú e-mailovú adresu.");
+                    alert("La dirección de correo electrónico introducida no se reconoce, introduzca una dirección de correo electrónico válida.");
                     event.preventDefault();
                     return false;
                 }
- 
                 // Validate phone if provided
                 if (phone && !validatePhone(phone)) {
-                    alert("Zadajte platné telefónne číslo.");
+                    alert("Por favor ingrese un número de teléfono válido.");
                     event.preventDefault();
                     return false;
                 }
- 
                 return true; // Allow form submission
             }
- 
             function limitPhoneInput(event) {
                 const input = event.target;
                 const allowedCharacters = input.value.replace(/[^0-9+\s()]/g, ''); // Keep only allowed characters
                 input.value = allowedCharacters.slice(0, 16); // Limit to 16 characters
             }
-
+ 
             function resetForm() {
                 form.reset(); // Reset all form fields
                 submitButton.disabled = false; // Re-enable the submit button
             }
-
-           // Attach event listeners
-           form.addEventListener('submit', function(event) {
-            if (validateForm(event)) {
-                submitButton.disabled = true; // Disable the submit button after submission
-                // Delay the form reset to ensure the form is submitted successfully
-                setTimeout(resetForm, 100);
-            } else {
-                event.preventDefault(); // Prevent form submission if validation fails
-            }
-        });
+ 
+            // Attach event listeners
+            form.addEventListener('submit', function(event) {
+                if (validateForm(event)) {
+                    submitButton.disabled = true; // Disable the submit button after submission
+                    // Delay the form reset to ensure the form is submitted successfully
+                    setTimeout(resetForm, 100);
+                } else {
+                    event.preventDefault(); // Prevent form submission if validation fails
+                }
+            });
+ 
             phoneInput.addEventListener('input', limitPhoneInput);
         });
 </script>
 </head>
 <body>
- 
 <!-- Form Element -->
 <form action="https://jlr-360--naptqa.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D260000009LIY" method="POST">
 <input type="hidden" name="orgid" value="00D260000009LIY">
 <input type="hidden" name="retURL" value="https://">
- 
-    <label for="name">Meno</label>
+
+<label for="name">Nombre</label>
 <input id="name" maxlength="80" name="name" size="20" type="text" required />
- 
-    <label for="email">E-mailovú</label>
+<label for="email">Correo electrónico</label>
 <input id="email" maxlength="80" name="email" size="20" type="text"/>
- 
-    <label for="phone">Telefón</label>
+<label for="phone">Telefono</label>
 <input id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
- 
-    <label for="subject">Predmet</label>
+<label for="subject">Sujeto</label>
 <input id="subject" maxlength="80" name="subject" size="20" type="text" required />
- 
-    <label for="description">Popis</label>
+<label for="description">Descripción</label>
 <textarea name="description" required></textarea>
- 
-    <input type="hidden" name="recordType" value="01226000002uRfa" />
+<input type="hidden" name="recordType" value="01226000002uRfa" />
 <input type="hidden" name="priority" value="Low" />
 <input type="hidden" id="00N2600000EDEF8" name="00N2600000EDEF8" value="Europe" />
-<input id="00NVe000000lZNJ" maxlength="255" name="00NVe000000lZNJ" size="20" type="hidden" value="https://www.jaguar.sk"/>
- 
-    <input type="submit" name="submit" value="Odoslať">
+<input id="00NVe000000lZNJ" maxlength="255" name="00NVe000000lZNJ" size="20" type="hidden" value="https://www.jaguar.es"/>
+<input type="submit" name="submit" value="Entregar">
 </form>
- 
 </body>
 </html>
