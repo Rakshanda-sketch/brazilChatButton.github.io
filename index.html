@@ -155,8 +155,11 @@
 <input id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
 <label for="subject">Sujeto</label>
 <input id="subject" maxlength="80" name="subject" size="20" type="text" required />
-<label for="description">Descripción</label>
-<textarea name="description" required></textarea>
+<label for="description">Description</label>
+<textarea name="description" required
+oninvalid="setCustomValidity('Bitte füllen Sie dieses Feld aus.')"
+oninput="setCustomValidity('')"
+></textarea><br>
 <input type="hidden" name="recordType" value="01226000002uRfa" />
 <input type="hidden" name="priority" value="Low" />
 <input type="hidden" id="00N2600000EDEF8" name="00N2600000EDEF8" value="Europe" />
